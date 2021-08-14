@@ -67,8 +67,8 @@
 
   |  Coliumn        |Type    | Option    |
   |------------     |--------|--------   |
-  |postal_code      |string  |null:false |
-  |shipping_area_id      |string  |null:false |
+  |postal_code      |integer  |null:false |
+  |shipping_area_id      |integer  |null:false |
   |municipalities   |string  |null:false |
   |address          |string  |null:false |
   |building_name    |string  |           |
@@ -76,9 +76,8 @@
   |purchases_historys|references | null: false, foreign_key: true |
   
   ## Association
-  - belongs_to :user
   - belongs_to :item
-  - has_one    :purchase_history
+  - belongs_to    :purchase_history
 
 
 <!-- 
@@ -103,6 +102,7 @@
   |------------     |--------|--------   |
   |user             | references | null: false, foreign_key: true |
   |item             | references | null: false, foreign_key: true |
+  |purchase         | references | null: false, foreign_key: true |
 
   ## Association
-  - belongs_to :purchase
+  - has_one :purchase
