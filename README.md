@@ -4,12 +4,14 @@
   |  Coliumn           |  Type      | Option    |
   |------------        |--------    |--------   |
   |nickname            |string      |null:false |
-  |email               |string      |null:false |
+  |email               |string      |unique: true |
   |password            |string      |null:false |
   |encrypted_password  |string      |null:false |
   |family_name         |string      |null:false |
   |first_name          |string      |null:false |
-  |birthday            |string      |null:false |
+  |family_name_katakana         |string      |null:false |
+  |first_name_katakana          |string      |null:false |
+  |birthday            |datetime    |:only_integer|
   
   ## Association
   - has_many :items
@@ -27,25 +29,25 @@
 
 ## items テーブル
 
-  |  Coliumn     |  Type  | Option    |
-  |------------  |--------|--------   |
-  |image         |        |           |
-  |name          |string  |null:false |
-  |introduction  |text    |null:false |
-  |category      | string | null:false |
-  |condition     | string | null:false |
-  |delivery_fee  |text    |null:false |
-  |shipping_area |text    |null:false |
-  |days_to_ship  |text    |null:false |
-  |price         |text    |null:false |
-  |user          | references | null: false, foreign_key: true |
+  |  Coliumn        |  Type     | Option    |
+  |------------     |--------   |--------   |
+  |name             |string     |null:false |
+  |introduction     |text       |null:false |
+  |category_id      |integer    | null:false |
+  |condition_id     |integer    | null:false |
+  |delivery_fee_id  |integer    |null:false |
+  |shipping_area_id |integer    |null:false |
+  |days_to_ship_id  |integer    |null:false |
+  |price            |integer       |null:false |
+  |user             | references| null: false, foreign_key: true |
 
   ## Association
   - belongs_to :user
   - has_one :purchase
+  
 
 <!-- ・itemsテーブルが持っている情報
-商品画像
+商品画像→「active_storage」を使用するため、設計の段階から削除（理由はactive_storage導入時に自動でテーブルが生成されるからです）
 商品名（４０文字まで）
 商品の説明（１０００文字まで）
 
@@ -66,14 +68,13 @@
 
   |  Coliumn        |Type    | Option    |
   |------------     |--------|--------   |
-  |card_information |string  |null:false |
   |date_of_expiry   |string  |null:false |
   |security_code    |string  |null:false |
   |postal_code      |string  |null:false |
   |prefectures      |string  |null:false |
   |municipalities   |string  |null:false |
   |address          |string  |null:false |
-  |building_name    |string  |null:true  |
+  |building_name    |string  |           |
   |telephone_number |string  |null:false |
   |user             | references | null: false, foreign_key: true |
   |item             | references | null: false, foreign_key: true |
@@ -81,11 +82,13 @@
   ## Association
   - belongs_to :user
   - belongs_to :item
+  - has_one    :purchase history
 
 
-<!-- ・購入テーブルが持っている情報
+<!-- 
+・購入テーブルが持っている情報
 クレジットカード情報入力という大枠（これは情報ではない）
-カード情報
+カード情報→セキュリティの観点からデータベースに入れることができないため削除
 有効期限
 セキュリティコード
 
@@ -94,5 +97,16 @@
 都道府県
 市区町村
 番地
-建物名 
-電話番号 -->
+建物名 →任意入力なのでオプションの箇所は空欄にした
+電話番号
+ -->
+
+ ## purchases_history テーブル
+
+  |  Coliumn        |Type    | Option    |
+  |------------     |--------|--------   |
+  |user             | references | null: false, foreign_key: true |
+  |item             | references | null: false, foreign_key: true |
+
+  ## Association
+  - belongs_to :purchase
