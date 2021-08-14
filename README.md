@@ -5,13 +5,12 @@
   |------------        |--------    |--------   |
   |nickname            |string      |null:false |
   |email               |string      |unique: true |
-  |password            |string      |null:false |
   |encrypted_password  |string      |null:false |
   |family_name         |string      |null:false |
   |first_name          |string      |null:false |
   |family_name_katakana         |string      |null:false |
   |first_name_katakana          |string      |null:false |
-  |birthday            |datetime    |:only_integer|
+  |birthday            |date    |null:false|
   
   ## Association
   - has_many :items
@@ -21,7 +20,7 @@
 ・usersテーブルが持っている情報
 ニックネーム
 メールアドレス
-パスワード（６文字以上）
+パスワード（６文字以上）→passwordカラムは削除。deviseのgemがあらかじめ用意しているencrypted_passwordを使用しているため。
 パスワード（確認）
 お名前(全角)
 お名前カナ(全角)
@@ -71,14 +70,13 @@
   |date_of_expiry   |string  |null:false |
   |security_code    |string  |null:false |
   |postal_code      |string  |null:false |
-  |prefectures      |string  |null:false |
+  |shipping_area_id      |string  |null:false |
   |municipalities   |string  |null:false |
   |address          |string  |null:false |
   |building_name    |string  |           |
   |telephone_number |string  |null:false |
-  |user             | references | null: false, foreign_key: true |
-  |item             | references | null: false, foreign_key: true |
-
+  |order             | references | null: false, foreign_key: true |
+  
   ## Association
   - belongs_to :user
   - belongs_to :item
@@ -101,7 +99,7 @@
 電話番号
  -->
 
- ## purchases_history テーブル
+ ## purchases_historys テーブル
 
   |  Coliumn        |Type    | Option    |
   |------------     |--------|--------   |
