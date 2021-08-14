@@ -14,8 +14,7 @@
   
   ## Association
   - has_many :items
-  - has_many :purchases
-  - has_many :purchases_historys
+  - has_many :purchases_histories
 
 
 <!-- 
@@ -97,7 +96,7 @@
 電話番号
  -->
 
- ## purchases_historys テーブル
+ ## purchases_histories テーブル
 
   |  Coliumn        |Type    | Option    |
   |------------     |--------|--------   |
@@ -105,5 +104,6 @@
   |item             | references | null: false, foreign_key: true |
 
   ## Association
-  - has_one :item
+  - belongs_to :item
   - belongs_to :user
+  - belongs_to :purchase
