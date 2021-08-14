@@ -67,28 +67,26 @@
 
   |  Coliumn        |Type    | Option    |
   |------------     |--------|--------   |
-  |date_of_expiry   |string  |null:false |
-  |security_code    |string  |null:false |
   |postal_code      |string  |null:false |
   |shipping_area_id      |string  |null:false |
   |municipalities   |string  |null:false |
   |address          |string  |null:false |
   |building_name    |string  |           |
   |telephone_number |string  |null:false |
-  |order             | references | null: false, foreign_key: true |
+  |purchases_historys|references | null: false, foreign_key: true |
   
   ## Association
   - belongs_to :user
   - belongs_to :item
-  - has_one    :purchase history
+  - has_one    :purchase_history
 
 
 <!-- 
 ・購入テーブルが持っている情報
 クレジットカード情報入力という大枠（これは情報ではない）
 カード情報→セキュリティの観点からデータベースに入れることができないため削除
-有効期限
-セキュリティコード
+有効期限→セキュリティの観点からデータベースに入れることができないため削除
+セキュリティコード→セキュリティの観点からデータベースに入れることができないため削除
 
 配送先入力という大枠（これは情報ではない）
 郵便番号 
