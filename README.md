@@ -4,7 +4,7 @@
   |  Coliumn           |  Type      | Option    |
   |------------        |--------    |--------   |
   |nickname            |string      |null:false |
-  |email               |string      |unique: true |
+  |email               |string      |unique: true, null:false|
   |encrypted_password  |string      |null:false |
   |family_name         |string      |null:false |
   |first_name          |string      |null:false |
@@ -15,6 +15,8 @@
   ## Association
   - has_many :items
   - has_many :purchases
+  - has_many :purchases_historys
+
 
 <!-- 
 ・usersテーブルが持っている情報
@@ -42,7 +44,7 @@
 
   ## Association
   - belongs_to :user
-  - has_one :purchase
+  - has_one :purchase_history
   
 
 <!-- ・itemsテーブルが持っている情報
@@ -73,10 +75,9 @@
   |address          |string  |null:false |
   |building_name    |string  |           |
   |telephone_number |string  |null:false |
-  |purchases_historys|references | null: false, foreign_key: true |
+  |purchases_history|references | null: false, foreign_key: true |
   
   ## Association
-  - belongs_to :item
   - belongs_to    :purchase_history
 
 
@@ -102,7 +103,7 @@
   |------------     |--------|--------   |
   |user             | references | null: false, foreign_key: true |
   |item             | references | null: false, foreign_key: true |
-  |purchase         | references | null: false, foreign_key: true |
 
   ## Association
-  - has_one :purchase
+  - has_one :item
+  - belongs_to :user
