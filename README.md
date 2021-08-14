@@ -68,7 +68,7 @@
 
   |  Coliumn        |Type    | Option    |
   |------------     |--------|--------   |
-  |postal_code      |integer  |null:false |
+  |postal_code      |string  |null:false |
   |shipping_area_id      |integer  |null:false |
   |municipalities   |string  |null:false |
   |address          |string  |null:false |
@@ -106,4 +106,4 @@
   ## Association
   - belongs_to :item
   - belongs_to :user
-  - belongs_to :purchase
+  - has_one :purchase
