@@ -4,33 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-         
+  validates:nickname,presence:true
+  validates:email,presence:true
+  validates:encrypted_password,presence:true, length: {minimum:6}
+  validates:family_name,presence:true
+  validates:first_name,presence:true
+  validates:family_name_katakana,presence:true
+  validates:first_name_katakana,presence:true
+  validates:birthday,presence:true
+
+  has_many :items
+  has_many :purchases_histories
+
 end
-
-
-
-# |  Coliumn           |  Type      | Option    |
-# |------------        |--------    |--------   |
-# |nickname            |string      |null:false |
-# |email               |string      |unique: true, null:false|
-# |encrypted_password  |string      |null:false |
-# |family_name         |string      |null:false |
-# |first_name          |string      |null:false |
-# |family_name_katakana         |string      |null:false |
-# |first_name_katakana          |string      |null:false |
-# |birthday            |date    |null:false|
-
-# ## Association
-# - has_many :items
-# - has_many :purchases_histories
-
-
-# <!-- 
-# ・usersテーブルが持っている情報
-# ニックネーム
-# メールアドレス
-# パスワード（６文字以上）→passwordカラムは削除。deviseのgemがあらかじめ用意しているencrypted_passwordを使用しているため。
-# パスワード（確認）
-# お名前(全角)
-# お名前カナ(全角)
-# 生年月日  ここだけプルダウンして選択-->
