@@ -1,19 +1,30 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+ 
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'エラー内容を後から記述'
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   validates:nickname,presence:true
   validates:email,presence:true
-  validates:encrypted_password,presence:true, length: {minimum:6}
-  validates:family_name,presence:true
-  validates:first_name,presence:true
-  validates:family_name_katakana,presence:true
-  validates:first_name_katakana,presence:true
-  validates:birthday,presence:true
+  validates:password,presence:true, length: {minimum:6},format:{with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/}
+  validates:family_name,presence:true,format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
+  validates:first_name,presence:true,format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
+  validates:family_name_katakana,presence:true,format: { with: /\A[ァ-ヶ一]+\z/ }
+  validates:first_name_katakana,presence:true,format: { with: /\A[ァ-ヶ一]+\z/ }
+                      validates:birthday,presence:true
 
-  has_many :items
-  has_many :purchases_histories
+  # 必要な段階くるまで以下コメントアウトにしている
+  # has_many :items
+  # has_many :purchases_histories
 
 end
+
+# １４〜１５行目、ユーザーの名字と名前に関しては下記のような要件定義がされております。
+# ・漢字・平仮名・カタカナ以外では登録できないこと
+
+# １６〜１７行目、ユーザーの名字と名前の振り仮名に関しては下記のように要件定義されております。
+# ・全角カタカナ以外では登録できないこと
