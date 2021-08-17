@@ -4,26 +4,31 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname
-    validates :email
-    validates :password
     validates :family_name
     validates :first_name
     validates :family_name_katakana
     validates :first_name_katakana
     validates :birthday
+    
+    with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do
+      validates :family_name,format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
+      validates :first_name,format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
+
+      with_options format: { with: /\A[ァ-ヶ一]+\z/ } do
+        validates :family_name_katakana,format: { with: /\A[ァ-ヶ一]+\z/ }
+        validates :first_name_katakana,format: { with: /\A[ァ-ヶ一]+\z/ }
+      end
+    end
   end
  
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  validates_format_of :password, with: PASSWORD_REGEX,
+  validates_format_of :password, with: PASSWORD_REGEX
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :password, length: {minimum:6},format:{with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/}
-  validates :family_name,format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
-  validates :first_name,format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
-  validates :family_name_katakana,format: { with: /\A[ァ-ヶ一]+\z/ }
-  validates :first_name_katakana,format: { with: /\A[ァ-ヶ一]+\z/ }
+  validates :password, format:{with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/}
+
 
 
   # 必要な段階くるまで以下コメントアウトにしている
