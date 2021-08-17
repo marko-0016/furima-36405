@@ -14,7 +14,7 @@ class User < ApplicationRecord
       validates :family_name
       validates :first_name
     end
-    
+
       with_options format: { with: /\A[ァ-ヶ一]+\z/ } do
         validates :family_name_katakana
         validates :first_name_katakana
@@ -26,10 +26,6 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  validates :password, format:{with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/}
-
-
 
   # 必要な段階くるまで以下コメントアウトにしている
   # has_many :items
