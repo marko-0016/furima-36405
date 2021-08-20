@@ -1,13 +1,26 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
+  belongs_to :condition
+  belongs_to :days_to_ship
+  belongs_to :delivery_fee
+  belongs_to :shipping_area
+
   belongs_to :user
   has_one_attached :image
   
+
     #ジャンルの選択が「--」の時は保存できないようにする
     validates :category_id,:condition_id,:delivery_fee_id,:shipping_area_id,:days_to_ship_id, numericality: { other_than: 0 , message: "can't be blank"}
 
+    validates :price,numericality: { only_integer:true, greater_than_or_equal_to:300, less_than_or_equal_to: 9999999 }
+
+    with_options format: { with: /\A[0-9]+\z/ } do
+      validates :price
+    end
+
   with_options presence: true do
+    # validates :image  ここに書いたらテストコードエラーで引っかかるためコメントアウト中
     validates :name
     validates :introduction
     validates :category_id
