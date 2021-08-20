@@ -12,8 +12,9 @@ class Item < ApplicationRecord
 
     #ジャンルの選択が「--」の時は保存できないようにする
     validates :category_id,:condition_id,:delivery_fee_id,:shipping_area_id,:days_to_ship_id, numericality: { other_than: 0 , message: "can't be blank"}
-
+    #金額が300円以上9999999円以下のバリデーション
     validates :price,numericality: { only_integer:true, greater_than_or_equal_to:300, less_than_or_equal_to: 9999999 }
+
 
     with_options format: { with: /\A[0-9]+\z/ } do
       validates :price
@@ -35,5 +36,3 @@ end
 
   #  Association
   # has_one :purchase_history
-
-
