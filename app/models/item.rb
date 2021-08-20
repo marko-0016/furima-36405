@@ -20,7 +20,7 @@ class Item < ApplicationRecord
     end
 
   with_options presence: true do
-    # validates :image  ここに書いたらテストコードエラーで引っかかるためコメントアウト中
+    validates :image
     validates :name
     validates :introduction
     validates :category_id

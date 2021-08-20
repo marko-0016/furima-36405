@@ -10,7 +10,11 @@ FactoryBot.define do
     shipping_area_id  {1}
     days_to_ship_id   {1}
     price             {1000}
-    image             {nil}
 
+
+    after(:build) do |message|
+      message.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+    end
+    
     end
 end
