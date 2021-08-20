@@ -27,8 +27,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :items
+
+
   # 必要な段階くるまで以下コメントアウトにしている
-  # has_many :items
   # has_many :purchases_histories
 
 end
