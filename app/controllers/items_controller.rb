@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
-    # @items = Item.order("created_at DESC") 商品一覧機能で実装するのでそれまでコメントアウトにしておく
+    @items = Item.order("created_at DESC")
   end
 
   def new
@@ -11,8 +11,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-  #バリデーション通過の可否を条件に処理を分岐
-  # 入力した商品情報がバリデーションを通過しなかった場合、再度「商品出品ページ」が表示されるように実装
   @item =  Item.new(item_params)
    if @item.save
     redirect_to root_path
