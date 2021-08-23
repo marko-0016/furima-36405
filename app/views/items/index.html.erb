@@ -131,15 +131,15 @@
     <%  if @items.present? %>
     <% @items.each do |item| %>
       <li class='list'>
-        <%= link_to "#" do %>
+        <%= link_to item_path(item.id) do %>
         <div class='item-img-content' >
           <%= image_tag item.image, class: "item-img" %>
 
-          <%# <% if @items.present? %>
+          <%# <% if @items.present? 購入機能実装の際まで一時コメントアウト中 %>
            <div class='sold-out'> 
             <span>Sold Out!!</span>
            </div> 
-          <%# <% end %> 
+          <%# <% end 購入機能実装の際まで一時コメントアウト中%> 
            </div>
         <div class='item-info'>
           <h3 class='item-name'>
@@ -158,7 +158,7 @@
         <% end %>
       <% else %>
       <li class='list'>
-        <%= link_to '#' do %>
+        <%= link_to item_path(item.id) do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
         <div class='item-info'>
           <h3 class='item-name'>
