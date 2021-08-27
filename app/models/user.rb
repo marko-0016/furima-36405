@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
 
   # 必要な段階くるまで以下コメントアウトにしている
-  # has_many :purchases_histories
+  has_many :purchases_histories
 
 end
 

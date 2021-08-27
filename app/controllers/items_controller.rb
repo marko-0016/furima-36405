@@ -38,8 +38,6 @@ def destroy
    @item.destroy
   redirect_to root_path
 end
-end
-
 
   private
    def item_params
@@ -52,7 +50,7 @@ end
 
    def set_user
    if @item.user != current_user
-  redirect_to root_path   
+  redirect_to root_path
   end
 end
 
