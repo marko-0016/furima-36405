@@ -134,12 +134,11 @@
         <%= link_to item_path(item.id) do %>
         <div class='item-img-content' >
           <%= image_tag item.image, class: "item-img" %>
-
-          <%# <% if @items.present? 購入機能実装の際まで一時コメントアウト中 %>
+          <% if item.purchases_history.present? %>
            <div class='sold-out'> 
             <span>Sold Out!!</span>
            </div> 
-          <%# <% end 購入機能実装の際まで一時コメントアウト中%> 
+          <% end %> 
            </div>
         <div class='item-info'>
           <h3 class='item-name'>

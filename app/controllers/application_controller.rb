@@ -8,9 +8,5 @@ class ApplicationController < ActionController::Base
  end
 end
 
-# keysにパスワードは不要？
-# |encrypted_password  
-
-
 # フリマアプリ基本機能だけの場合はユーザーズコントローラーは作成しない。
 # 追加機能でユーザー詳細などを作る場合は生成する

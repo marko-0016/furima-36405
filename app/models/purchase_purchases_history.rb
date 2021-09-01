@@ -1,6 +1,6 @@
 class PurchasePurchasesHistory
     include ActiveModel::Model
-    attr_accessor :postal_code, :shipping_area_id, :municipalities, :address, :building_name, :telephone_number, :user_id, :item_id
+    attr_accessor :postal_code, :shipping_area_id, :municipalities, :address, :building_name, :telephone_number, :user_id, :item_id,:token
   
     # 空欄はNGのバリデーション
     with_options presence: true do
@@ -8,6 +8,7 @@ class PurchasePurchasesHistory
       validates :municipalities
       validates :address
       validates :telephone_number
+      validates :token
    end
 
     # #ジャンルの選択が「--」の時は保存できないようにするバリデーション設定する
@@ -23,5 +24,5 @@ class PurchasePurchasesHistory
       purchases_history = PurchasesHistory.create!(item_id: item_id, user_id: user_id)
       Purchase.create(postal_code: postal_code, shipping_area_id: shipping_area_id, municipalities: municipalities, address: address, building_name: building_name, telephone_number: telephone_number, purchases_history_id: purchases_history.id)
     end
-
-  end
+    
+end

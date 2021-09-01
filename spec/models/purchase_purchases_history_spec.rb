@@ -7,6 +7,12 @@ require 'rails_helper'
 
     describe "購入画面" do
       context '購入できないとき' do
+        it "tokenが空だと登録できない" do
+          @purchase_purchases_history.token = ''
+          @purchase_purchases_history.valid?
+          expect(@purchase_purchases_history.errors.full_messages).to include("Token can't be blank")
+        end
+
         it "postal_codeが空だと登録できない" do
           @purchase_purchases_history.postal_code = ''
           @purchase_purchases_history.valid?
@@ -53,7 +59,7 @@ require 'rails_helper'
           expect(@purchase_purchases_history.errors.full_messages).to include("Telephone number is invalid")
         end
         context '購入ができるとき' do
-          it "postal_codeとshipping_area_id、municipalities、address、telephone_numberが存在すれば登録できる" do
+          it "postal_codeとshipping_area_id、municipalities、address、telephone_number、tokenが存在すれば登録できる" do
             expect(@purchase_purchases_history).to be_valid
           end
         end    
