@@ -53,8 +53,13 @@ require 'rails_helper'
           @purchase_purchases_history.valid?
           expect(@purchase_purchases_history.errors.full_messages).to include("Telephone number is invalid")
         end
-        it "telephone_numberは10桁以上11桁以内でないと登録できない" do
+        it "telephone_numberは9桁以下だと登録できない" do
           @purchase_purchases_history.telephone_number = '111111'
+          @purchase_purchases_history.valid?
+          expect(@purchase_purchases_history.errors.full_messages).to include("Telephone number is invalid")
+        end
+        it "telephone_numberは12桁以上だと登録できない" do
+          @purchase_purchases_history.telephone_number = '111111111111111'
           @purchase_purchases_history.valid?
           expect(@purchase_purchases_history.errors.full_messages).to include("Telephone number is invalid")
         end
@@ -62,13 +67,12 @@ require 'rails_helper'
           it "postal_codeとshipping_area_id、municipalities、address、telephone_number、tokenが存在すれば登録できる" do
             expect(@purchase_purchases_history).to be_valid
           end
+            it "building_nameが空でも登録できる" do
+              expect(@purchase_purchases_history).to be_valid
+            end
         end    
 
       end
     end
 
   end
-
-
-  # binding.pry
-

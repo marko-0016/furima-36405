@@ -33,5 +33,3 @@ class PurchasesController < ApplicationController
  params.require(:purchase_purchases_history).permit(:postal_code, :shipping_area_id, :municipalities, :address, :building_name, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
   end
 end
-
-#binding.pry
