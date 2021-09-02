@@ -1,9 +1,15 @@
 require 'rails_helper'
 
   RSpec.describe PurchasePurchasesHistory, type: :model do
-    before do
-      @purchase_purchases_history = FactoryBot.build(:purchase_purchases_history)
-    end
+
+before do
+user = FactoryBot.create(:user)
+item = FactoryBot.create(:item)
+@purchase_purchases_history = FactoryBot.build(:purchase_purchases_history,user_id: user.id , item_id: item.id)
+
+sleep(1)
+
+end
 
     describe "購入画面" do
       context '購入できないとき' do
@@ -63,6 +69,17 @@ require 'rails_helper'
           @purchase_purchases_history.valid?
           expect(@purchase_purchases_history.errors.full_messages).to include("Telephone number is invalid")
         end
+        it "user_id（購入者）が空だと購入できない" do
+          @purchase_purchases_history.user_id = ''
+          @purchase_purchases_history.valid?
+          expect(@purchase_purchases_history.errors.full_messages).to include("User can't be blank")
+        end
+        it "item_id（購入商品）が空だと購入できない" do
+          @purchase_purchases_history.item_id = ''
+          @purchase_purchases_history.valid?
+          expect(@purchase_purchases_history.errors.full_messages).to include("Item can't be blank")
+        end
+    
         context '購入ができるとき' do
           it "postal_codeとshipping_area_id、municipalities、address、telephone_number、tokenが存在すれば登録できる" do
             expect(@purchase_purchases_history).to be_valid
