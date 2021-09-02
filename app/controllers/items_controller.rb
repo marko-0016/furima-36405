@@ -51,7 +51,7 @@ end
    end
 
    def set_user
-   if @item.user != current_user || @purchase == nil
+   if @item.user != current_user || @item.purchase == nil
   redirect_to root_path
   end
 end

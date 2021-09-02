@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :create]
 
   def index
     @purchase_purchases_history = PurchasePurchasesHistory.new
@@ -20,7 +20,7 @@ class PurchasesController < ApplicationController
       card: purchase_purchases_history_params[:token], 
       currency: 'jpy'     
     )
-       @purchase_purchases_history.save
+       @purchase_purc hases_history.save
        redirect_to root_path
     else
       render :index 
