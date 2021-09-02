@@ -12,10 +12,3 @@ window.addEventListener('load', () => {
     
   })
 });
-
-
-
-// 以下を入力するとターミナルに出力できるが可読性下げるため消している
-    // console.log(inputValue);
-    // console.log(addTaxDom);
-    // console.log(profitNumber);

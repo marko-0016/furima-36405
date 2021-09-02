@@ -1,7 +1,6 @@
 <%= render "shared/second-header"%>
 
 <%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
-<%# ↑ 上記はあっているので触らない %>
 <div class='form-wrap'>
   <div class='form-header'>
     <h1 class='form-header-text'>
@@ -10,7 +9,6 @@
   </div>
 
   <%= render 'shared/error_messages', model: f.object %>
-<%# ↑ 上記はあっているので触らない %>
 
   <div class="form-group">
     <div class='form-text-wrap'>
