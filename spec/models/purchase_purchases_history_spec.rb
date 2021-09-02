@@ -85,6 +85,7 @@ end
             expect(@purchase_purchases_history).to be_valid
           end
             it "building_nameが空でも登録できる" do
+              @purchase_purchases_history.building_name = ''
               expect(@purchase_purchases_history).to be_valid
             end
         end    
